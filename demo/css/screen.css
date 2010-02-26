@@ -1,0 +1,26 @@
+/*
+ *	DEMO STYLING
+ */
+ 
+ body{font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif, sans;}
+ 
+.select_replace{
+	width: 200px;
+	height: 22px;
+	background: #efefef url(../css/dropdown.png) no-repeat center right ;
+	border: 1px solid #ccc;
+	position: relative;
+}
+	.display {
+		width: 178px;
+		height: 20px;
+		margin: 1px;
+		line-height: 20px;
+		background-color: #fff;
+		overflow: hidden;
+	}
+	.options{
+		background-color: red;
+		position:absolute;
+		height: 200px;
+	}
