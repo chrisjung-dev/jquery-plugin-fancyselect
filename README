@@ -1,0 +1,21 @@
+/*
+*	jQuery.FancySelect
+*/
+
+FEATURES
+================================
+
+  * These Dropdowns will be normal dropdowns if JS is disabled
+  * Values and Actions are syncronized with the hidden option fields
+  * Number of visible entries configurable
+  * MouseOver-colors definable
+  * Type-A-Head like IE
+  * No prerequisites for the dropdowns needed
+
+LICENCE
+================================
+This Plugin and it's variations are licensed under a 
+
+CC - BY - SA Licence
+
+
