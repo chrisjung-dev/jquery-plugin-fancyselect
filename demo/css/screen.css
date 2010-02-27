@@ -23,4 +23,5 @@
 		background-color: red;
 		position:absolute;
 		height: 200px;
+		z-index: 999;
 	}
