@@ -49,7 +49,7 @@
 				if( $( optgroups[ i_optgroups ] ).attr('label') != "" ) {
 					$(new_group).append('<strong>' + $( optgroups[ i_optgroups ] ).attr('label') + '</strong>');
 				}
-				var o_options 	= $( optgroups ).find('option');
+				var o_options = $( optgroups[ i_optgroups ] ).find('option');
 				var o_n_options = o_options.length;
 				$.fn.FancySelect.renderOptions( o_options, o_n_options, new_group );
 			}
