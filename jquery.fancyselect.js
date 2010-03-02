@@ -53,7 +53,7 @@
 				var o_n_options = o_options.length;
 				$.fn.FancySelect.renderOptions( o_options, o_n_options, new_group );
 			}
-			if( n_optgroups = 0 ) {
+			if( n_optgroups == 0 ) {
 				$.fn.FancySelect.renderOptions( options, n_options, $list );
 			}
 		} else if( $this.find('div.options:hidden').length ) {
