@@ -64,7 +64,7 @@
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
-		for( i_options = 0; i_options < _n_options; i++ ) {
+		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			$(_target).append('<li value="' + $( _options[ i_options ]).attr('value') + '">'+ $( _options[ i_options ]).text() + '</li>');
 		}
 	},
