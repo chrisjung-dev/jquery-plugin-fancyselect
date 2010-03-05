@@ -25,3 +25,7 @@
 		height: 200px;
 		z-index: 999;
 	}
+	.entry_hover {
+		background-color:blue;
+		color: #fff;
+	}

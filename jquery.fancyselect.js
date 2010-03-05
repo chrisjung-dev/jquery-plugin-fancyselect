@@ -22,9 +22,13 @@
 			$replace.click(function(){
 				$.fn.FancySelect.openList($replace);
 			});
+			$( $this.attr('id') ).delegate('li', 'hover', function(){
+				$(this).toggleClass('entry_hover');
+			});
+			$(this).delegate('li', 'click', function(){
+				$.fn.FancySelect.clickEntry( $(this) );
+			});
 		});
-		
-		
 		//$(document).click(close);
 	},
 	$.fn.FancySelect.openList = function(_el){
@@ -68,7 +72,12 @@
 			$(_target).append('<li value="' + $( _options[ i_options ]).attr('value') + '">'+ $( _options[ i_options ]).text() + '</li>');
 		}
 	},
-	$.fn.FancySelect.closeList = function(e){
+	$.fn.FancySelect.clickEntry = function( el ){
+		try{
+			console.log( el.serialize() );
+		} catch( e ){}
+	},
+	$.fn.FancySelect.closeList = function( e ){
 		$('div.options:visible').hide();
 	},
 	// plugin defaults - added as a property on our plugin function
