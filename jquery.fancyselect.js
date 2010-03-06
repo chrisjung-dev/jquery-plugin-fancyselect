@@ -22,10 +22,17 @@
 			$replace.click(function(){
 				$.fn.FancySelect.openList($replace);
 			});
-			$( $this.attr('id') ).delegate('li', 'hover', function(){
-				$(this).toggleClass('entry_hover');
+//			$( 'div.options' ).delegate('li', 'hover', function(){
+//				$(this).toggleClass('entry_hover');
+//			});
+			$('div.options ul li').live('mouseover mouseout', function( event ){
+				if( event.type == "mouseover" ) {
+					$(this).addClass('entry_hover');
+				} else {
+					$(this).removeClass('entry_hover');
+				}
 			});
-			$(this).delegate('li', 'click', function(){
+			$( 'div.options' ).delegate('li', 'click', function(){
 				$.fn.FancySelect.clickEntry( $(this) );
 			});
 		});
@@ -42,20 +49,18 @@
 
 		if( n_options > 0 && has_options == 0 ) {
 			//if optgroups only, loop is not needed, cause there is nothing clickable
-
 			$this.append('<div class="options"></div>');
-
 			var $list = $this.find('.options').empty();
 			var i_optgroups;
-
 			for( i_optgroups = 0; i_optgroups < n_optgroups; i_optgroups++ ) {
-				var new_group = $list.append('<div class="group"></div>');
+				$list.append('<div class="group"></div>');
+				var $new_group = $list.find('div.group');
 				if( $( optgroups[ i_optgroups ] ).attr('label') != "" ) {
-					$(new_group).append('<strong>' + $( optgroups[ i_optgroups ] ).attr('label') + '</strong>');
+					$new_group.append('<strong>' + $( optgroups[ i_optgroups ] ).attr('label') + '</strong>');
 				}
 				var o_options = $( optgroups[ i_optgroups ] ).find('option');
 				var o_n_options = o_options.length;
-				$.fn.FancySelect.renderOptions( o_options, o_n_options, new_group );
+				$.fn.FancySelect.renderOptions( o_options, o_n_options, $new_group );
 			}
 			if( n_optgroups == 0 ) {
 				$.fn.FancySelect.renderOptions( options, n_options, $list );
@@ -68,13 +73,15 @@
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
+		$target = $(_target).append('<ul></ul>');
+		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
-			$(_target).append('<li value="' + $( _options[ i_options ]).attr('value') + '">'+ $( _options[ i_options ]).text() + '</li>');
+			$target.append('<li value="' + $( _options[ i_options ]).attr('value') + '">'+ $( _options[ i_options ]).text() + '</li>');
 		}
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
 		try{
-			console.log( el.serialize() );
+			console.log( el );
 		} catch( e ){}
 	},
 	$.fn.FancySelect.closeList = function( e ){
