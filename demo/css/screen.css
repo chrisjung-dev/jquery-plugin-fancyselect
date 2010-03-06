@@ -20,13 +20,29 @@
 		overflow: hidden;
 	}
 	.options{
-		background-color: red;
+		background-color: #efefef;
 		position:absolute;
-		height: 200px;
 		z-index: 999;
-		width: auto;
+		width: 198px;
+		border: 1px solid #000;
 	}
-	.entry_hover {
-		background-color:blue;
-		color: #fff;
-	}
+		.options .group {
+			/* optgroup-surrounding div */
+		}
+		.options strong {
+			/* optgroup head */
+		}
+		.options ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;	
+		}
+		.options li {
+			list-style-type: none;
+			margin: 0;
+			padding: 3px 5px;
+		}
+		.entry_hover {
+			background-color:#fff;
+			color: #000;
+		}

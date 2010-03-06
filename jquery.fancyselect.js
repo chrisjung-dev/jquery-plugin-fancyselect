@@ -32,7 +32,7 @@
 					$(this).removeClass('entry_hover');
 				}
 			});
-			$( 'div.options' ).delegate('li', 'click', function(){
+			$( '#' + $this.attr('name')+'_dropdown' ).delegate('.options li', 'click', function(){
 				$.fn.FancySelect.clickEntry( $(this) );
 			});
 		});
@@ -82,7 +82,7 @@
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
 		try{
-			console.log( el );
+			console.log( 'click' );
 		} catch( e ){}
 	},
 	$.fn.FancySelect.closeList = function( e ){
