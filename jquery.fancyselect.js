@@ -54,7 +54,8 @@
 			var i_optgroups;
 			for( i_optgroups = 0; i_optgroups < n_optgroups; i_optgroups++ ) {
 				$list.append('<div class="group"></div>');
-				var $new_group = $list.find('div.group');
+				// need the last selector to get always the "newest" group to append the list items
+				var $new_group = $list.find('div.group:last');
 				if( $( optgroups[ i_optgroups ] ).attr('label') != "" ) {
 					$new_group.append('<strong>' + $( optgroups[ i_optgroups ] ).attr('label') + '</strong>');
 				}

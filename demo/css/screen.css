@@ -24,6 +24,7 @@
 		position:absolute;
 		height: 200px;
 		z-index: 999;
+		width: auto;
 	}
 	.entry_hover {
 		background-color:blue;
