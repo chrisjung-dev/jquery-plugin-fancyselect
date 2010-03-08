@@ -71,6 +71,11 @@
 		} else {
 			$.fn.FancySelect.closeList();		
 		}
+
+		$(_el).css({
+			overflow: 'hidden',
+			height: ( $( _el ).find('li').height() ) * maxEntries + "px"
+		});
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -91,6 +96,7 @@
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
 		borderColor: '#ccc',
-		color: '#0000fd'
+		color: '#0000fd',
+		maxEntries: '8'
 	};
 })(jQuery);
