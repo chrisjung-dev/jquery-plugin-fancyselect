@@ -22,19 +22,6 @@
 			$replace.click(function(){
 				$.fn.FancySelect.openList($replace);
 			});
-//			$( 'div.options' ).delegate('li', 'hover', function(){
-//				$(this).toggleClass('entry_hover');
-//			});
-			$('div.options ul li').live('mouseover mouseout', function( event ){
-				if( event.type == "mouseover" ) {
-					$(this).addClass('entry_hover');
-				} else {
-					$(this).removeClass('entry_hover');
-				}
-			});
-			$( '#' + $this.attr('name')+'_dropdown' ).delegate('.options li', 'click', function(){
-				$.fn.FancySelect.clickEntry( $(this) );
-			});
 		});
 		//$(document).click(close);
 	},
@@ -83,15 +70,18 @@
 		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			var $li = $('<li/>', {
-				value:  $( _options[ i_options ]).attr('value'),
-				text:   $( _options[ i_options ]).text()
+				value:  	$( _options[ i_options ]).attr('value'),
+				text:   	$( _options[ i_options ]).text(),
+				mouseenter:	function(){ $(this).toggleClass('entry_hover') },
+				mouseleave:	function(){ $(this).toggleClass('entry_hover') },
+				click:		function(){ $.fn.FancySelect.clickEntry( $(this) ) }
 			});
 			$target.append( $li );
 		}
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
 		try{
-			console.log( 'click' );
+			console.log( 'click: ' + $( el ).text() );
 		} catch( e ){}
 	},
 	$.fn.FancySelect.closeList = function( e ){
