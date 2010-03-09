@@ -70,7 +70,7 @@
 		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			var $li = $('<li/>', {
-				value:  	$( _options[ i_options ]).attr('value'),
+				'clickvalue':  	$( _options[ i_options ]).attr('value'),
 				text:   	$( _options[ i_options ]).text(),
 				mouseenter:	function(){ $(this).toggleClass('entry_hover') },
 				mouseleave:	function(){ $(this).toggleClass('entry_hover') },
@@ -80,9 +80,9 @@
 		}
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
-		try{
-			console.log( 'click: ' + $( el ).text() );
-		} catch( e ){}
+		var $replace_elem = $( el ).parents( '.select_replace');
+		$replace_elem.find('select option[value="' + $( el ).attr('clickvalue') + '"]').attr( 'selected', 'selected' );
+		$replace_elem.find('.display' ).text( $( el ).text() )
 	},
 	$.fn.FancySelect.closeList = function( e ){
 		$('div.options:visible').hide();
