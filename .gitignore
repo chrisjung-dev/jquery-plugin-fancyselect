@@ -3,5 +3,4 @@
 *.patch
 .DS_Store
 Makefile
-*.min*
 *.swp
