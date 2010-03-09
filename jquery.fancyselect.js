@@ -72,9 +72,9 @@
 			$.fn.FancySelect.closeList();		
 		}
 
-		$(_el).css({
-			overflow: 'hidden',
-			height: ( $( _el ).find('li').height() ) * maxEntries + "px"
+		$('div.options').css({
+			overflow: 'auto',
+			height: ( $( _el ).find('li').outerHeight() ) * opts.maxEntries + "px"
 		});
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
@@ -82,7 +82,11 @@
 		$target = $(_target).append('<ul></ul>');
 		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
-			$target.append('<li value="' + $( _options[ i_options ]).attr('value') + '">'+ $( _options[ i_options ]).text() + '</li>');
+			$li = $('<li/>', {
+				value:  $( _options[ i_options ]).attr('value'),
+				text:   $( _options[ i_options ]).text()
+			});
+			$target.append( $li );
 		}
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
