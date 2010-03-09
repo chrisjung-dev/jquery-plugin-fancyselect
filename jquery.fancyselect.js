@@ -82,7 +82,7 @@
 		$target = $(_target).append('<ul></ul>');
 		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
-			$li = $('<li/>', {
+			var $li = $('<li/>', {
 				value:  $( _options[ i_options ]).attr('value'),
 				text:   $( _options[ i_options ]).text()
 			});
