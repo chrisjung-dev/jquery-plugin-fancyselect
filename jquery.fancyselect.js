@@ -81,8 +81,9 @@
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
 		var $replace_elem = $( el ).parents( '.select_replace');
+		$replace_elem.find('.display' ).text( $( el ).text() );
 		$replace_elem.find('select option[value="' + $( el ).attr('clickvalue') + '"]').attr( 'selected', 'selected' );
-		$replace_elem.find('.display' ).text( $( el ).text() )
+		$replace_elem.find('select').trigger('change'); // do this programmatically because setting the selected does not do this
 	},
 	$.fn.FancySelect.closeList = function( e ){
 		$('div.options:visible').hide();
