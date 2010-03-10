@@ -28,6 +28,11 @@
 	}
 		.options .group {
 			/* optgroup-surrounding div */
+			background-color: #ccc;
+			border: 2px solid #333;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-
 		}
 		.options strong {
 			/* optgroup head */
@@ -41,6 +46,9 @@
 			list-style-type: none;
 			margin: 0;
 			padding: 3px 5px;
+		}
+		.entry_selected {
+			background-color: #66f;
 		}
 		.entry_hover {
 			background-color:#fff;

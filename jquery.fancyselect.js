@@ -2,7 +2,7 @@
  * jQuery.FancySelect()
  * 
  * @author Christian Jung <campino2k@gmail.com>
- * @license CC-BY-SA
+ * @license CC-BY-NC-SA
  *
  * Date: Fr 26 Feb 2010 20:24:52 CET 
  *
@@ -13,7 +13,7 @@
 
 (function($) {
 	$.fn.FancySelect = function(options) {
-		opts = $.extend({}, $.fn.FancySelect.defaults, options);
+		opts = $.extend( {}, $.fn.FancySelect.defaults, options );
 		return this.each(function(){
 			var $this = $(this);
 			$this.wrap('<div class="select_replace" id="'+$this.attr('name')+'_dropdown"></div>').hide();
@@ -23,15 +23,14 @@
 				$.fn.FancySelect.openList($replace);
 			});
 		});
-		//$(document).click(close);
 	},
 	$.fn.FancySelect.openList = function(_el){
-
 		var $this=$(_el); // save element
-		var optgroups 	= $this.find('select optgroup');
-		var options 	= $this.find('select option');
+		var $select_elem = $this.find('select');
+		var optgroups = $this.find('select optgroup');
+		var options	= $this.find('select option');
 		var n_optgroups	= optgroups.length; //save number of optgroups
-		var n_options 	= options.length; //save number of options
+		var n_options = options.length; //save number of options
 		var has_options = $this.find('.options').length; 
 
 		if( n_options > 0 && has_options == 0 ) {
@@ -58,11 +57,15 @@
 		} else {
 			$.fn.FancySelect.closeList();		
 		}
-
-		$('div.options').css({
+		var $options = $('div.options');
+		$options.css({
 			overflow: 'auto',
 			height: ( $( _el ).find('li').outerHeight() ) * opts.maxEntries + "px"
 		});
+		$options.find( 'li' ).removeClass('entry_selected');
+		$options_actual = $options.find( 'li[clickvalue="' + $select_elem.val() + '"]' );
+		$options_actual.addClass( 'entry_selected' );
+		$options.scrollTop( $options_actual.position().top ); // move the selected element into the viewport
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -70,10 +73,10 @@
 		$target = $target.find('ul');
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			var $li = $('<li/>', {
-				'clickvalue':  	$( _options[ i_options ]).attr('value'),
-				text:   	$( _options[ i_options ]).text(),
-				mouseenter:	function(){ $(this).toggleClass('entry_hover') },
-				mouseleave:	function(){ $(this).toggleClass('entry_hover') },
+				'clickvalue':	$( _options[ i_options ]).attr('value'),
+				text:		$( _options[ i_options ]).text(),
+				mouseenter:	function(){ $(this).addClass('entry_hover') },
+				mouseleave:	function(){ $(this).removeClass('entry_hover') },
 				click:		function(){ $.fn.FancySelect.clickEntry( $(this) ) }
 			});
 			$target.append( $li );
@@ -82,7 +85,7 @@
 	$.fn.FancySelect.clickEntry = function( el ){
 		var $replace_elem = $( el ).parents( '.select_replace');
 		$replace_elem.find('.display' ).text( $( el ).text() );
-		$replace_elem.find('select option[value="' + $( el ).attr('clickvalue') + '"]').attr( 'selected', 'selected' );
+		$replace_elem.find('select').val( $( el ).attr('clickvalue') );
 		$replace_elem.find('select').trigger('change'); // do this programmatically because setting the selected does not do this
 	},
 	$.fn.FancySelect.closeList = function( e ){
@@ -90,8 +93,6 @@
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
-		borderColor: '#ccc',
-		color: '#0000fd',
 		maxEntries: '8'
 	};
 })(jQuery);
