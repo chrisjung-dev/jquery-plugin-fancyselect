@@ -65,7 +65,13 @@
 		$options.find( 'li' ).removeClass('entry_selected');
 		$options_actual = $options.find( 'li[clickvalue="' + $select_elem.val() + '"]' );
 		$options_actual.addClass( 'entry_selected' );
-		$options.scrollTop( $options_actual.position().top ); // move the selected element into the viewport
+		var $elem = $options_actual;
+		var $offsetTop = 0;
+		while ( $elem.hasClass('options') == false ){
+			$offsetTop = $offsetTop + $elem.position().top;
+			$elem  = $elem.parent();
+		};
+		$options.scrollTop( $offsetTop );
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
