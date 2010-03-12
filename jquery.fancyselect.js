@@ -55,7 +55,8 @@
 		} else if( $this.find('div.options:hidden').length ) {
 			$this.find('div.options').show();
 		} else {
-			$.fn.FancySelect.closeList();		
+			$.fn.FancySelect.closeList();
+			return;		
 		}
 		var $options = $('div.options');
 		$options.css({
@@ -71,7 +72,9 @@
 			$offsetTop = $offsetTop + $elem.position().top;
 			$elem  = $elem.parent();
 		};
-		$options.scrollTop( $offsetTop );
+		if( $offsetTop >= $options.outerHeight() ){
+			$options.scrollTop( $offsetTop );
+		}
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
