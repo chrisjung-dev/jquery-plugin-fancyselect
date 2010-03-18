@@ -10,7 +10,6 @@
 	background: #efefef url(../images/dropdown.png) no-repeat center right ;
 	border: 1px solid #ccc;
 	position: relative;
-	z-index: 1;
 }
 	.display {
 		width: 178px;
@@ -19,6 +18,7 @@
 		line-height: 20px;
 		background-color: #fff;
 		overflow: hidden;
+		position: relative;
 	}
 	.options{
 		background-color: #efefef;
