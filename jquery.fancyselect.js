@@ -100,6 +100,12 @@
 	$.fn.FancySelect.closeList = function( e ){
 		$('div.options:visible').hide();
 	},
+	$.fn.FancySelect.findEntryByKey = function( e ){
+		// append via document listener via $.fn.FancySelect.openList()
+		// unbind via $fn.FancySelect.closeList()
+		// use this to find, mark and scroll to the entry
+		var pressedKeyChar = "";
+	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
 		maxEntries: '8'
