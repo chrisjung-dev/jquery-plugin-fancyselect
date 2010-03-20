@@ -81,8 +81,8 @@
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
-		$target = $(_target).append('<ul></ul>');
-		$target = $target.find('ul');
+		$ul = $( '<ul/>' );
+		$( _target ).append( $ul );
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			var $li = $('<li/>', {
 				'clickvalue':	$( _options[ i_options ]).attr('value'),
@@ -91,7 +91,7 @@
 				mouseleave:	function(){ $(this).removeClass('entry_hover') },
 				click:		function(){ $.fn.FancySelect.clickEntry( $(this) ) }
 			});
-			$target.append( $li );
+			$ul.append( $li );
 		}
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
