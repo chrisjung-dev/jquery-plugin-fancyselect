@@ -32,7 +32,6 @@
 		var n_optgroups	= optgroups.length; //save number of optgroups
 		var n_options = options.length; //save number of options
 		var has_options = $this.find('.options').length; 
-
 		if( n_options > 0 && has_options == 0 ) {
 			//if optgroups only, loop is not needed, cause there is nothing clickable
 			$this.append('<div class="options"></div>');
@@ -75,6 +74,10 @@
 		if( $offsetTop >= $options.outerHeight() ){
 			$options.scrollTop( $offsetTop );
 		}
+		// append Listener on Document for keypressing
+		$( document ).keydown(function( e ){
+			$.fn.FancySelect.findEntryByKey( e );
+		});
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -98,13 +101,18 @@
 		$replace_elem.find('select').trigger('change'); // do this programmatically because setting the selected does not do this
 	},
 	$.fn.FancySelect.closeList = function( e ){
-		$('div.options:visible').hide();
+		$( 'div.options:visible' ).hide();
+		$( document ).unbind( 'keydown' );
 	},
-	$.fn.FancySelect.findEntryByKey = function( e ){
+	$.fn.FancySelect.findEntryByKey = function( ev ){
 		// append via document listener via $.fn.FancySelect.openList()
 		// unbind via $fn.FancySelect.closeList()
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
+		try {
+			console.log( ev )
+		} catch( e ){alert( ev )};
+
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
