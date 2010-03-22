@@ -75,7 +75,7 @@
 			$options.scrollTop( $offsetTop );
 		}
 		// append Listener on Document for keypressing
-		$( document ).keydown(function( e ){
+		$( document ).keypress(function( e ){
 			$.fn.FancySelect.findEntryByKey( e );
 		});
 	},
@@ -109,10 +109,13 @@
 		// unbind via $fn.FancySelect.closeList()
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
-		try {
-			console.log( ev )
-		} catch( e ){alert( ev )};
-
+		pressedKeyChar = ev.which;
+		if( pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
+			var chr = String.fromCharCode( pressedKeyChar );
+			var entry = $( 'div.options:visible li' ).filter( function(){
+			//	return /^'+ chr +'/.test( $(this).text() )
+			});
+		}
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
