@@ -109,13 +109,25 @@
 		// unbind via $fn.FancySelect.closeList()
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
+		var entry; // need this in several subroutines
 		pressedKeyChar = ev.which;
+		try { console.log( ev.which ) } catch( e ){};
 		if( pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
-			var entry = $( 'div.options:visible li' ).filter( function(){
-			//	return /^'+ chr +'/.test( $(this).text() )
+			entry = $( 'div.options:visible li' ).filter( function(){
+				var find = new RegExp( '^'+chr, 'i' );
+				return find.test( $(this).text() )
 			});
+			entry.parents( 'ul' )
+				.find( 'li' )
+				.trigger( 'mouseleave' );
+			entry.first().trigger( 'mouseenter' );
 		}
+		if( pressedKeyChar == 13 ) {
+			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
+			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
+			$( 'div.options:visible li.entry_selected' ).trigger( 'click');
+		}	
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
