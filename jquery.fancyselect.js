@@ -111,7 +111,6 @@
 		var pressedKeyChar = "";
 		var entry; // need this in several subroutines
 		pressedKeyChar = ev.which;
-		try { console.log( ev.which ) } catch( e ){};
 		if( pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
 			entry = $( 'div.options:visible li' ).filter( function(){
