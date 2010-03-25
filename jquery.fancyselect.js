@@ -10,6 +10,7 @@
  * http://www.learningjquery.com/2007/10/a-plugin-development-pattern
  *
  */
+var searchString='';
 
 (function($) {
 	$.fn.FancySelect = function(options) {
@@ -110,9 +111,18 @@
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
 		var entry; // need this in several subroutines
+
 		pressedKeyChar = ev.which;
+		try {
+			window.clearTimeout( clearstring );
+		} catch( e ) {};
 		if( pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
+			searchString += chr;
+			clearString = window.setTimeout( 'searchString="";', opts.searchResetTime )
+			try {
+				console.log( searchString )
+			} catch( e ){};
 			entry = $( 'div.options:visible li' ).filter( function(){
 				var find = new RegExp( '^'+chr, 'i' );
 				return find.test( $(this).text() )
@@ -130,6 +140,7 @@
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
-		maxEntries: '8'
+		maxEntries: '8',
+		searchResetTime: 600 // timeout for clearing the search-string
 	};
 })(jQuery);
