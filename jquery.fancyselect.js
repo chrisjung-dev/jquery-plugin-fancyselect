@@ -120,9 +120,6 @@ var searchString='';
 			var chr = String.fromCharCode( pressedKeyChar );
 			searchString += chr;
 			clearString = window.setTimeout( 'searchString="";', opts.searchResetTime )
-			try {
-				console.log( searchString )
-			} catch( e ){};
 			entry = $( 'div.options:visible li' ).filter( function(){
 				var find = new RegExp( '^'+chr, 'i' );
 				return find.test( $(this).text() )
