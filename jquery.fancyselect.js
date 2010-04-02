@@ -113,17 +113,19 @@ var searchString='';
 		var entry; // need this in several subroutines
 
 		pressedKeyChar = ev.which;
+		try{ console.log( pressedKeyChar )}catch(e){}; 
 		try {
-			window.clearTimeout( clearstring );
+			window.clearTimeout( clearString );
 		} catch( e ) {};
-		if( pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
+		if( pressedKeyChar == 32 || pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
 			searchString += chr;
 			clearString = window.setTimeout( 'searchString="";', opts.searchResetTime )
 			entry = $( 'div.options:visible li' ).filter( function(){
-				var find = new RegExp( '^'+chr, 'i' );
+				var find = new RegExp( '^'+searchString, 'i' );
 				return find.test( $(this).text() )
 			});
+			try {console.log( searchString ) } catch ( e ) {}
 			entry.parents( 'ul' )
 				.find( 'li' )
 				.trigger( 'mouseleave' );
