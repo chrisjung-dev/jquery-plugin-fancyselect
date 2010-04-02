@@ -113,7 +113,6 @@ var searchString='';
 		var entry; // need this in several subroutines
 
 		pressedKeyChar = ev.which;
-		try{ console.log( pressedKeyChar )}catch(e){}; 
 		try {
 			window.clearTimeout( clearString );
 		} catch( e ) {};
@@ -125,7 +124,6 @@ var searchString='';
 				var find = new RegExp( '^'+searchString, 'i' );
 				return find.test( $(this).text() )
 			});
-			try {console.log( searchString ) } catch ( e ) {}
 			entry.parents( 'ul' )
 				.find( 'li' )
 				.trigger( 'mouseleave' );
