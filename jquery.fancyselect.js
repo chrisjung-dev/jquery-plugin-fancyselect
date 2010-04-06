@@ -129,6 +129,15 @@ var searchString='';
 				.trigger( 'mouseleave' );
 			entry.first().trigger( 'mouseenter' );
 		}
+		
+		if( ev.keyCode == 38 ){
+			// up-arrow
+			try{console.log('up-arrow')}catch(e){}
+		} 
+		if( ev.keyCode == 40 ) {
+			//down-arrow
+			try{console.log('down-arrow')}catch(e){}
+		}
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
 			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
