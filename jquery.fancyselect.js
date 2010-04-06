@@ -15,7 +15,7 @@ var searchString='';
 (function($) {
 	$.fn.FancySelect = function(options) {
 		opts = $.extend( {}, $.fn.FancySelect.defaults, options );
-		return this.each(function(){
+		return this.each( function(){
 			var $this = $(this);
 			$this.wrap('<div class="select_replace" id="'+$this.attr('name')+'_dropdown"></div>').hide();
 			var $replace = $this.parents('.select_replace');
@@ -103,7 +103,7 @@ var searchString='';
 	},
 	$.fn.FancySelect.closeList = function( e ){
 		$( 'div.options:visible' ).hide();
-		$( document ).unbind( 'keydown' );
+		$( document ).unbind( 'keypress' );
 	},
 	$.fn.FancySelect.findEntryByKey = function( ev ){
 		// append via document listener via $.fn.FancySelect.openList()
@@ -111,7 +111,6 @@ var searchString='';
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
 		var entry; // need this in several subroutines
-
 		pressedKeyChar = ev.which;
 		try {
 			window.clearTimeout( clearString );
@@ -130,13 +129,37 @@ var searchString='';
 			entry.first().trigger( 'mouseenter' );
 		}
 		
-		if( ev.keyCode == 38 ){
-			// up-arrow
-			try{console.log('up-arrow')}catch(e){}
+		if( ev.keyCode == 38 ) {
+			ev.preventDefault(); // disable scolling
+			if( $( 'div.options:visible li.entry_hover' ) ) {
+				$this = $( 'div.options:visible li.entry_hover' );
+				if( $this.prev().length > 0 ) {
+					$this.trigger( 'mouseleave' );
+					$this.prev().trigger( 'mouseenter' );
+				}
+			} else {
+				$this = $( 'div.options:visible li.entry_selected' );
+				if( $this.prev().length > 0 ) {
+					$this.trigger( 'mouseleave' );
+					$this.prev().trigger( 'mouseenter' );
+				}
+			}
 		} 
 		if( ev.keyCode == 40 ) {
-			//down-arrow
-			try{console.log('down-arrow')}catch(e){}
+			ev.preventDefault(); // disable scolling
+			if( $( 'div.options:visible li.entry_hover' ) ) {
+				$this = $( 'div.options:visible li.entry_hover' );
+				if( $this.next().length > 0 ) {
+					$this.trigger( 'mouseleave' );
+					$this.next().trigger( 'mouseenter' );
+				}
+			} else {
+				$this = $( 'div.options:visible li.entry_selected' );
+				if( $this.next().length > 0 ) {
+					$this.trigger( 'mouseleave' )
+					$this.next().trigger( 'mouseenter' );
+				}
+			}
 		}
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
