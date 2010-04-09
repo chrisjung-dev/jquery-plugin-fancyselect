@@ -16,6 +16,7 @@ var searchString='';
 	$.fn.FancySelect = function(options) {
 		opts = $.extend( {}, $.fn.FancySelect.defaults, options );
 		return this.each( function(){
+			// this cycles through all matched objects and attaches / runs all other functions
 			var $this = $(this);
 			$this.wrap('<div class="select_replace" id="'+$this.attr('name')+'_dropdown"></div>').hide();
 			var $replace = $this.parents('.select_replace');
