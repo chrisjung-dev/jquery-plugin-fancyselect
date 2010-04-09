@@ -129,39 +129,30 @@ var searchString='';
 				.trigger( 'mouseleave' );
 			entry.first().trigger( 'mouseenter' );
 		}
-		
-		if( ev.keyCode == 38 ) {
+		if( ev.keyCode == 38 || ev.keyCode == 40 ) {
 			ev.preventDefault(); // disable scolling
-			if( $( 'div.options:visible li.entry_hover' ) ) {
-				$this = $( 'div.options:visible li.entry_hover' );
-				if( $this.prev().length > 0 ) {
-					$this.trigger( 'mouseleave' );
-					$this.prev().trigger( 'mouseenter' );
-				}
+			// select first an active triggered then select additionally the selected use the first element (should be the hovered)
+			$this = $( 'div.options:visible li.entry_hover' );
+			if( $this.length == 0 ){
+			   $this = $( 'div.options:visible li.entry_selected' );
+			}
+			if( ev.keyCode == 38 ) {
+				$new = $this.prev();
 			} else {
-				$this = $( 'div.options:visible li.entry_selected' );
-				if( $this.prev().length > 0 ) {
-					$this.trigger( 'mouseleave' );
-					$this.prev().trigger( 'mouseenter' );
-				}
+				$new = $this.next();
+			}
+			if( $new.length > 0 ) { // dont wrap around on the first/last element
+				$this.trigger( 'mouseleave' );
+				$new.trigger( 'mouseenter' );
+			} else {
+				// check if a next or prev group is available
+				$new = $this.parents( 'div.group' ).next().find( 'li' ).first();
+				$new = $this.parents( 'div.group' ).prev().find( 'li' ).last();
+
+				$this.trigger( 'mouseleave' );
+				$new.trigger( 'mouseenter' );
 			}
 		} 
-		if( ev.keyCode == 40 ) {
-			ev.preventDefault(); // disable scolling
-			if( $( 'div.options:visible li.entry_hover' ) ) {
-				$this = $( 'div.options:visible li.entry_hover' );
-				if( $this.next().length > 0 ) {
-					$this.trigger( 'mouseleave' );
-					$this.next().trigger( 'mouseenter' );
-				}
-			} else {
-				$this = $( 'div.options:visible li.entry_selected' );
-				if( $this.next().length > 0 ) {
-					$this.trigger( 'mouseleave' )
-					$this.next().trigger( 'mouseenter' );
-				}
-			}
-		}
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
 			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
