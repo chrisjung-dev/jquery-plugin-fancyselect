@@ -138,20 +138,21 @@ var searchString='';
 			}
 			if( ev.keyCode == 38 ) {
 				$new = $this.prev();
+				// check if a next or prev group is available
+				if( $new.length == 0 ) {
+					$new = $this.parents( 'div.group' ).prev().find( 'li' ).last();
+				}
 			} else {
 				$new = $this.next();
+				if( $new.length == 0 ) {
+				// check if a next or prev group is available
+					$new = $this.parents( 'div.group' ).next().find( 'li' ).first();
+				}
 			}
 			if( $new.length > 0 ) { // dont wrap around on the first/last element
 				$this.trigger( 'mouseleave' );
 				$new.trigger( 'mouseenter' );
-			} else {
-				// check if a next or prev group is available
-				$new = $this.parents( 'div.group' ).next().find( 'li' ).first();
-				$new = $this.parents( 'div.group' ).prev().find( 'li' ).last();
-
-				$this.trigger( 'mouseleave' );
-				$new.trigger( 'mouseenter' );
-			}
+			} 
 		} 
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
