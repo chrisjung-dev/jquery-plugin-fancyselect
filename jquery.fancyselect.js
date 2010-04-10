@@ -86,12 +86,24 @@ var searchString='';
 		$ul = $( '<ul/>' );
 		$( _target ).append( $ul );
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
-			var $li = $('<li/>', {
-				'clickvalue':	$( _options[ i_options ]).attr('value'),
+			var $li = $( '<li/>', {
+				'clickvalue':	$( _options[ i_options ]).attr( 'value' ),
 				text:		$( _options[ i_options ]).text(),
-				mouseenter:	function(){ $(this).addClass('entry_hover') },
-				mouseleave:	function(){ $(this).removeClass('entry_hover') },
-				click:		function(){ $.fn.FancySelect.clickEntry( $(this) ) }
+				mouseenter:	function() {
+					var $this = $( this );
+					$this.addClass( 'entry_hover' );
+					// scroll to entry
+					var topList = $this.parents( 'div.options' ).offset().top;
+					var bottomList = topList + $this.parents( 'div.options' ).innerHeight();
+					if( $this.offset().top + $this.outerHeight() > bottomList ){
+						$( 'div.options:visible' ).scrollTop( $( 'div.options:visible' ).scrollTop() + $this.outerHeight() );
+					}
+					if( $this.offset().top < topList ){
+						$( 'div.options:visible' ).scrollTop( $( 'div.options:visible' ).scrollTop() - $this.outerHeight() );
+					}
+				},
+				mouseleave:	function(){ $( this ).removeClass( 'entry_hover' ) },
+				click:		function(){ $.fn.FancySelect.clickEntry( $( this ) ) }
 			});
 			$ul.append( $li );
 		}
