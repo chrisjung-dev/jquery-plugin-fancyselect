@@ -27,6 +27,7 @@ var searchString='';
 		});
 	},
 	$.fn.FancySelect.openList = function(_el){
+		$.fn.FancySelect.closeList(); //close other eventually open lists
 		var $this=$(_el); // save element
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
@@ -80,6 +81,11 @@ var searchString='';
 		$( document ).keypress(function( e ){
 			$.fn.FancySelect.findEntryByKey( e );
 		});
+		$( 'body' ).click(function( event ) {
+			if( $( event.target ).parents( 'div.select_replace' ).length == 0 ) {
+				$.fn.FancySelect.closeList();
+			}
+		});
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -117,6 +123,7 @@ var searchString='';
 	$.fn.FancySelect.closeList = function( e ){
 		$( 'div.options:visible' ).hide();
 		$( document ).unbind( 'keypress' );
+		$( 'body' ).unbind( 'click' );
 	},
 	$.fn.FancySelect.findEntryByKey = function( ev ){
 		// append via document listener via $.fn.FancySelect.openList()
