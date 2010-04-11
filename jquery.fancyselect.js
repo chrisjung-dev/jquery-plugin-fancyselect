@@ -22,12 +22,17 @@ var searchString='';
 			var $replace = $this.parents('.select_replace');
 			$replace.append('<div class="display">'+$this.find('option:selected').text()+'</div>')
 			$replace.click(function(){
-				$.fn.FancySelect.openList($replace);
+				var openList = $( 'div.options:visible' )
+				if( openList.length > 0 ) {
+					$.fn.FancySelect.closeList();
+				} else {
+					$.fn.FancySelect.openList($replace);
+				}
 			});
 		});
 	},
 	$.fn.FancySelect.openList = function(_el){
-		console.log('openlist triggered');
+		$.fn.FancySelect.closeList();
 		var $this=$(_el); // save element
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
@@ -81,12 +86,7 @@ var searchString='';
 		$( document ).keypress(function( e ){
 			$.fn.FancySelect.findEntryByKey( e );
 		});
-/*		$( 'body' ).click(function( event ) {
-				console.log( "event: " +
-					event + 
-					"event.target: " +  
-					$( event.target )
-				)
+		$( 'body' ).click(function( event ) {
 			if(
 				$( event.target ).parents( 'div.select_replace' ).length == 0 && 
 				!$( event.target ).hasClass( 'select_replace' ) &&
@@ -94,7 +94,7 @@ var searchString='';
 			) {
 				$.fn.FancySelect.closeList();
 			}
-		}); */
+		});
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -121,7 +121,10 @@ var searchString='';
 					}
 				},
 				mouseleave:	function(){ $( this ).removeClass( 'entry_hover' ) },
-				click:		function(){ $.fn.FancySelect.clickEntry( $( this ) ) }
+				click:		function( event ){ 
+					$.fn.FancySelect.clickEntry( $( this ) );
+					event.stopPropagation();
+				}
 			});
 			$ul.append( $li );
 		}
@@ -134,10 +137,9 @@ var searchString='';
 		$.fn.FancySelect.closeList();
 	},
 	$.fn.FancySelect.closeList = function( e ){
-		console.log('closelist triggered');
 		$( 'div.options:visible' ).hide();
 		$( document ).unbind( 'keypress' );
-		//$( 'body' ).unbind( 'click' );
+		$( 'body' ).unbind( 'click' );
 	},
 	$.fn.FancySelect.findEntryByKey = function( ev ){
 		// append via document listener via $.fn.FancySelect.openList()
