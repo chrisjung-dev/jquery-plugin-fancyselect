@@ -185,13 +185,13 @@ var searchString='';
 			if( $new.length > 0 ) { // dont wrap around on the first/last element
 				$this.trigger( 'mouseleave' );
 				$new.trigger( 'mouseenter' );
-			}
+			} 
 		} 
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click' );
 			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
 			$( 'div.options:visible li.entry_selected' ).trigger( 'click' );
-		}
+		}	
 	},
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
