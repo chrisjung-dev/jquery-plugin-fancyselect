@@ -10,8 +10,9 @@ FEATURES
   * Values and Actions are syncronized with the hidden option fields
   * Number of visible entries configurable
   * MouseOver-colors definable
-  * Type-A-Head like IE
+  * Type-A-Head like Firefox ("searching" the options)
   * No prerequisites for the dropdowns needed
+  * Styling is completely done via CSS (demo included)
 
 LICENCE
 ================================
