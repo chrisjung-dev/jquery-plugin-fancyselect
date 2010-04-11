@@ -1,4 +1,4 @@
-/*!
+/*
  * jQuery.FancySelect()
  * 
  * @author Christian Jung <campino2k@gmail.com>
@@ -27,7 +27,7 @@ var searchString='';
 		});
 	},
 	$.fn.FancySelect.openList = function(_el){
-		$.fn.FancySelect.closeList(); //close other eventually open lists
+		console.log('openlist triggered');
 		var $this=$(_el); // save element
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
@@ -81,11 +81,20 @@ var searchString='';
 		$( document ).keypress(function( e ){
 			$.fn.FancySelect.findEntryByKey( e );
 		});
-		$( 'body' ).click(function( event ) {
-			if( $( event.target ).parents( 'div.select_replace' ).length == 0 ) {
+/*		$( 'body' ).click(function( event ) {
+				console.log( "event: " +
+					event + 
+					"event.target: " +  
+					$( event.target )
+				)
+			if(
+				$( event.target ).parents( 'div.select_replace' ).length == 0 && 
+				!$( event.target ).hasClass( 'select_replace' ) &&
+				$( 'div.options:visible' ).length > 0
+			) {
 				$.fn.FancySelect.closeList();
 			}
-		});
+		}); */
 	},
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
@@ -104,7 +113,10 @@ var searchString='';
 					if( $this.offset().top + $this.outerHeight() > bottomList ){
 						$( 'div.options:visible' ).scrollTop( $( 'div.options:visible' ).scrollTop() + $this.outerHeight() );
 					}
-					if( $this.offset().top < topList ){
+					while( $this.offset().top < topList ){
+					// since the top-scrolling with groups can be incorrect because
+					// of the group headers, do a while operation here to be able
+					// to execute this automatically more than once
 						$( 'div.options:visible' ).scrollTop( $( 'div.options:visible' ).scrollTop() - $this.outerHeight() );
 					}
 				},
@@ -119,11 +131,13 @@ var searchString='';
 		$replace_elem.find('.display' ).text( $( el ).text() );
 		$replace_elem.find('select').val( $( el ).attr('clickvalue') );
 		$replace_elem.find('select').trigger('change'); // do this programmatically because setting the selected does not do this
+		$.fn.FancySelect.closeList();
 	},
 	$.fn.FancySelect.closeList = function( e ){
+		console.log('closelist triggered');
 		$( 'div.options:visible' ).hide();
 		$( document ).unbind( 'keypress' );
-		$( 'body' ).unbind( 'click' );
+		//$( 'body' ).unbind( 'click' );
 	},
 	$.fn.FancySelect.findEntryByKey = function( ev ){
 		// append via document listener via $.fn.FancySelect.openList()
@@ -174,9 +188,9 @@ var searchString='';
 			}
 		} 
 		if( pressedKeyChar == 13 ) {
-			$( 'div.options:visible li.entry_hover' ).trigger( 'click');
+			$( 'div.options:visible li.entry_hover' ).trigger( 'click' );
 			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
-			$( 'div.options:visible li.entry_selected' ).trigger( 'click');
+			$( 'div.options:visible li.entry_selected' ).trigger( 'click' );
 		}
 	},
 	// plugin defaults - added as a property on our plugin function

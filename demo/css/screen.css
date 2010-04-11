@@ -9,12 +9,19 @@
 	height: 22px;
 	background: #efefef url(../images/dropdown.png) no-repeat center right ;
 	border: 1px solid #ccc;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 	position: relative;
 }
 	.display {
-		width: 178px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		width: 175px;
 		height: 20px;
 		margin: 1px;
+		padding-left: 3px;
 		line-height: 20px;
 		background-color: #fff;
 		overflow: hidden;
@@ -36,8 +43,20 @@
 			border-radius: 5px;
 			margin-bottom: 3px;
 		}
+		.options .group li:last-child {
+			-moz-border-radius-bottomleft: 5px;
+			-moz-border-radius-bottomright: 5px;
+			-webkit-border-bottom-left-radius: 5px;
+			-webkit-border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-radius: 5px;
+		}
 		.options strong {
 			/* optgroup head */
+			display: block;
+			padding-left: 3px;
+			border-bottom: 1px dotted #333;
 		}
 		.options ul {
 			list-style-type: none;
