@@ -99,7 +99,6 @@ var searchString='';
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
 		$ul = $( '<ul/>' );
-		$( _target ).append( $ul );
 		for( i_options = 0; i_options < _n_options; i_options++ ) {
 			var $li = $( '<li/>', {
 				'clickvalue':	$( _options[ i_options ]).attr( 'value' ),
@@ -128,6 +127,7 @@ var searchString='';
 			});
 			$ul.append( $li );
 		}
+		$( _target ).append( $ul );
 	},
 	$.fn.FancySelect.clickEntry = function( el ){
 		var $replace_elem = $( el ).parents( '.select_replace');
