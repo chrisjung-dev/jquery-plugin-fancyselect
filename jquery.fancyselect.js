@@ -24,7 +24,7 @@ var searchString='';
 			$replace.click(function(){
 				var openList = $( 'div.options:visible' )
 				if( openList.length > 0 ) {
-					$.fn.FancySelect.closeList();
+					$.fn.FancySelect.closeList($replace);
 				} else {
 					$.fn.FancySelect.openList($replace);
 				}
@@ -34,6 +34,7 @@ var searchString='';
 	$.fn.FancySelect.openList = function(_el){
 		$.fn.FancySelect.closeList();
 		var $this=$(_el); // save element
+		$this.css({zIndex:9999})
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
 		var options	= $this.find('select option');
@@ -137,6 +138,7 @@ var searchString='';
 		$.fn.FancySelect.closeList();
 	},
 	$.fn.FancySelect.closeList = function( e ){
+		$( e ).css({zIndex:5});
 		$( 'div.options:visible' ).hide();
 		$( document ).unbind( 'keypress' );
 		$( 'body' ).unbind( 'click' );
