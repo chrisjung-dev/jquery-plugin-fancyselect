@@ -31,6 +31,19 @@ var searchString='';
 			});
 		});
 	},
+	$.fn.extend({
+		setVal: function( _val ) {
+			$(this).val( _val ).trigger('change');
+				$(this).parents( '.select_replace' ).find('.display').text( $(this).find(':selected').text() )
+		},
+		update: function() {
+			if( $(this).find('option:selected').length > 0 ) {
+				$(this).parents( '.select_replace' ).find('.display').text( $(this).find('option:selected').text() );				
+			} else {
+				$(this).parents( '.select_replace' ).find('.display').text( $(this).find('option:first').text() );
+			}
+		}
+	}),
 	$.fn.FancySelect.openList = function(_el){
 		$.fn.FancySelect.closeList();
 		var $this=$(_el); // save element
