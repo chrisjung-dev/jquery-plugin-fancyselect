@@ -152,7 +152,11 @@ var searchString='';
 	},
 	$.fn.FancySelect.closeList = function( e ){
 		$( e ).css({zIndex:5});
-		$( 'div.options:visible' ).hide();
+		if( !opts.otfRendering ) {
+			$ 'div.options:visible' ).hide();
+		} else {
+			$ 'div.options:visible' ).remove();
+		}
 		$( document ).unbind( 'keypress' );
 		$( 'body' ).unbind( 'click' );
 	},
@@ -214,5 +218,6 @@ var searchString='';
 	$.fn.FancySelect.defaults = {
 		maxEntries: '8',
 		searchResetTime: 600 // timeout for clearing the search-string
+		otfRendering : false;
 	};
 })(jQuery);
