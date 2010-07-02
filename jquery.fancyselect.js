@@ -152,10 +152,10 @@ var searchString='';
 	},
 	$.fn.FancySelect.closeList = function( e ){
 		$( e ).css({zIndex:5});
-		if( !opts.otfRendering ) {
-			$ 'div.options:visible' ).hide();
+		if( opts.otfRendering ) {
+			$( 'div.options:visible' ).remove();
 		} else {
-			$ 'div.options:visible' ).remove();
+			$( 'div.options:visible' ).hide();
 		}
 		$( document ).unbind( 'keypress' );
 		$( 'body' ).unbind( 'click' );
@@ -217,7 +217,7 @@ var searchString='';
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
 		maxEntries: '8',
-		searchResetTime: 600 // timeout for clearing the search-string
-		otfRendering : false;
+		searchResetTime: 600, // timeout for clearing the search-string
+		otfRendering: true
 	};
 })(jQuery);
