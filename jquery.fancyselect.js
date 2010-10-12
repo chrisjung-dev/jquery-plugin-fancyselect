@@ -20,9 +20,9 @@ var searchString='';
 			var $this = $(this);
 			$this.wrap('<div class="select_replace" id="'+$this.attr('name')+'_dropdown"></div>').hide();
 			var $replace = $this.parents('.select_replace');
-			$replace.append('<div class="display">'+$this.find('option:selected').text()+'</div>')
+			$replace.append('<div class="display">'+$this.find('option:selected').text()+'</div>');
 			$replace.click(function(){
-				var openList = $( 'div.options:visible' )
+				var openList = $( 'div.options:visible' );
 				if( openList.length > 0 ) {
 					$.fn.FancySelect.closeList($replace);
 				} else {
@@ -34,7 +34,7 @@ var searchString='';
 	$.fn.extend({
 		setVal: function( _val ) {
 			$(this).val( _val ).trigger('change');
-				$(this).parents( '.select_replace' ).find('.display').text( $(this).find(':selected').text() )
+				$(this).parents( '.select_replace' ).find('.display').text( $(this).find(':selected').text() );
 		},
 		update: function() {
 			if( $(this).find('option:selected').length > 0 ) {
@@ -47,7 +47,7 @@ var searchString='';
 	$.fn.FancySelect.openList = function(_el){
 		$.fn.FancySelect.closeList();
 		var $this=$(_el); // save element
-		$this.css({zIndex:9999})
+		$this.css({zIndex:9999});
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
 		var options	= $this.find('select option');
@@ -133,7 +133,7 @@ var searchString='';
 						$( 'div.options:visible' ).scrollTop( $( 'div.options:visible' ).scrollTop() - $this.outerHeight() );
 					}
 				},
-				mouseleave:	function(){ $( this ).removeClass( 'entry_hover' ) },
+				mouseleave:	function(){ $( this ).removeClass( 'entry_hover' ); },
 				click:		function( event ){ 
 					$.fn.FancySelect.clickEntry( $( this ) );
 					event.stopPropagation();
@@ -173,10 +173,10 @@ var searchString='';
 		if( pressedKeyChar == 32 || pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
 			searchString += chr;
-			clearString = window.setTimeout( 'searchString="";', opts.searchResetTime )
+			clearString = window.setTimeout( 'searchString="";', opts.searchResetTime );
 			entry = $( 'div.options:visible li' ).filter( function(){
 				var find = new RegExp( '^'+searchString, 'i' );
-				return find.test( $(this).text() )
+				return find.test( $(this).text() );
 			});
 			entry.parents( 'ul' )
 				.find( 'li' )
