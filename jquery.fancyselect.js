@@ -151,7 +151,7 @@ var searchString='';
 		$.fn.FancySelect.closeList();
 	},
 	$.fn.FancySelect.closeList = function( e ){
-		$( e ).add('div.select_replace').css({zIndex:0});
+		$( e ).add( 'div.select_replace' ).css({zIndex:0});
 		if( opts.otfRendering ) {
 			$( 'div.options:visible' ).remove();
 		} else {
