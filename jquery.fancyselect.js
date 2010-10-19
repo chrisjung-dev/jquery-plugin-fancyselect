@@ -185,7 +185,8 @@ var searchString='';
 		}
 		if( ev.keyCode == 38 || ev.keyCode == 40 ) {
 			ev.preventDefault(); // disable scolling
-			// select first an active triggered then select additionally the selected use the first element (should be the hovered)
+			// select first an active triggered then select additionally
+			// the selected use the first element (should be the hovered)
 			$this = $( 'div.options:visible li.entry_hover' );
 			if( $this.length == 0 ){
 			   $this = $( 'div.options:visible li.entry_selected' );
@@ -203,14 +204,17 @@ var searchString='';
 					$new = $this.parents( 'div.group' ).next().find( 'li' ).first();
 				}
 			}
-			if( $new.length > 0 ) { // dont wrap around on the first/last element
+			if( $new.length > 0 ) {
+				// dont wrap around on the first/last element
 				$this.trigger( 'mouseleave' );
 				$new.trigger( 'mouseenter' );
 			} 
 		} 
 		if( pressedKeyChar == 13 ) {
 			$( 'div.options:visible li.entry_hover' ).trigger( 'click' );
-			// the following will fail if the entry_hover was found and triggered since there is no visible options list after success
+			// the following will fail if the entry_hover was
+			// found and triggered since there is no visible options list after success
+			// this is intentional
 			$( 'div.options:visible li.entry_selected' ).trigger( 'click' );
 		}	
 	},
