@@ -44,19 +44,19 @@ var searchString='';
 			}
 		}
 	}),
-	$.fn.FancySelect.openList = function(_el){
+	$.fn.FancySelect.openList = function( _el ){
 		$.fn.FancySelect.closeList();
-		var $this=$(_el); // save element
+		var $this=$( _el ); // save element
 		$this.css({zIndex:9999});
 		var $select_elem = $this.find('select');
 		var optgroups = $this.find('select optgroup');
+        var n_optgroups = optgroups.length;
 		var options	= $this.find('select option');
-		var n_optgroups	= optgroups.length; //save number of optgroups
 		var n_options = options.length; //save number of options
 		var has_options = $this.find('.options').length; 
 		if( n_options > 0 && has_options == 0 ) {
 			//if optgroups only, loop is not needed, cause there is nothing clickable
-			$this.append('<div class="options"></div>');
+			$this.append( '<div class="options"></div>' );
 			var $list = $this.find('.options').empty();
 			var i_optgroups;
 			for( i_optgroups = 0; i_optgroups < n_optgroups; i_optgroups++ ) {
@@ -97,7 +97,7 @@ var searchString='';
 			$options.scrollTop( $offsetTop );
 		}
 		// append Listener on Document for keypressing
-		$( document ).keypress(function( e ){
+		$( document ).keydown(function( e ){
 			$.fn.FancySelect.findEntryByKey( e );
 		});
 		$( 'body' ).click(function( event ) {
@@ -161,13 +161,13 @@ var searchString='';
 		$( 'body' ).unbind( 'click' );
 	},
 	$.fn.FancySelect.findEntryByKey = function( ev ){
-		// append via document listener via $.fn.FancySelect.openList()
+        // append via document listener via $.fn.FancySelect.openList()
 		// unbind via $fn.FancySelect.closeList()
 		// use this to find, mark and scroll to the entry
 		var pressedKeyChar = "";
 		var entry; // need this in several subroutines
 		pressedKeyChar = ev.which;
-		try {
+        try {
 			window.clearTimeout( clearString );
 		} catch( e ) {};
 		if( pressedKeyChar == 32 || pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
