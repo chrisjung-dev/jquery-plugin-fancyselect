@@ -30,7 +30,7 @@ var searchString='';
 				}
 			});
 		});
-	},
+	};
 	$.fn.extend({
 		setVal: function( _val ) {
 			$(this).val( _val ).trigger('change');
@@ -43,7 +43,7 @@ var searchString='';
 				$(this).parents( '.select_replace' ).find('.display').text( $(this).find('option:first').text() );
 			}
 		}
-	}),
+	});
 	$.fn.FancySelect.openList = function( _el ){
 		$.fn.FancySelect.closeList();
 		var $this=$( _el ); // save element
@@ -54,7 +54,7 @@ var searchString='';
 		var options	= $this.find('select option');
 		var n_options = options.length; //save number of options
 		var has_options = $this.find('.options').length; 
-		if( n_options > 0 && has_options == 0 ) {
+		if( n_options > 0 && has_options === 0 ) {
 			//if optgroups only, loop is not needed, cause there is nothing clickable
 			$this.append( '<div class="options"></div>' );
 			var $list = $this.find('.options').empty();
@@ -63,14 +63,14 @@ var searchString='';
 				$list.append('<div class="group"></div>');
 				// need the last selector to get always the "newest" group to append the list items
 				var $new_group = $list.find('div.group:last');
-				if( $( optgroups[ i_optgroups ] ).attr('label') != "" ) {
+				if( $( optgroups[ i_optgroups ] ).attr('label') !== "" ) {
 					$new_group.append('<strong>' + $( optgroups[ i_optgroups ] ).attr('label') + '</strong>');
 				}
 				var o_options = $( optgroups[ i_optgroups ] ).find('option');
 				var o_n_options = o_options.length;
 				$.fn.FancySelect.renderOptions( o_options, o_n_options, $new_group );
 			}
-			if( n_optgroups == 0 ) {
+			if( n_optgroups === 0 ) {
 				$.fn.FancySelect.renderOptions( options, n_options, $list );
 			}
 		} else if( $this.find('div.options:hidden').length ) {
@@ -89,10 +89,10 @@ var searchString='';
 		$options_actual.addClass( 'entry_selected' );
 		var $elem = $options_actual;
 		var $offsetTop = 0;
-		while ( $elem.hasClass('options') == false ){
+		while ( $elem.hasClass('options') === false ){
 			$offsetTop = $offsetTop + $elem.position().top;
 			$elem  = $elem.parent();
-		};
+		}
 		if( $offsetTop >= $options.outerHeight() ){
 			$options.scrollTop( $offsetTop );
 		}
@@ -102,14 +102,14 @@ var searchString='';
 		});
 		$( 'body' ).click(function( event ) {
 			if(
-				$( event.target ).parents( 'div.select_replace' ).length == 0 && 
+				$( event.target ).parents( 'div.select_replace' ).length === 0 && 
 				!$( event.target ).hasClass( 'select_replace' ) &&
 				$( 'div.options:visible' ).length > 0
 			) {
 				$.fn.FancySelect.closeList();
 			}
 		});
-	},
+	};
 	$.fn.FancySelect.renderOptions = function( _options, _n_options, _target ) {
 		var i_options;
 		$ul = $( '<ul/>' );
@@ -142,14 +142,14 @@ var searchString='';
 			$ul.append( $li );
 		}
 		$( _target ).append( $ul );
-	},
+	};
 	$.fn.FancySelect.clickEntry = function( el ){
 		var $replace_elem = $( el ).parents( '.select_replace');
 		$replace_elem.find('.display' ).text( $( el ).text() );
 		$replace_elem.find('select').val( $( el ).attr('clickvalue') );
 		$replace_elem.find('select').trigger('change'); // do this programmatically because setting the selected does not do this
 		$.fn.FancySelect.closeList();
-	},
+	};
 	$.fn.FancySelect.closeList = function( e ){
 		$( e ).add( 'div.select_replace' ).css({zIndex:0});
 		if( opts.otfRendering ) {
@@ -159,7 +159,7 @@ var searchString='';
 		}
 		$( document ).unbind( 'keypress' );
 		$( 'body' ).unbind( 'click' );
-	},
+	};
 	$.fn.FancySelect.findEntryByKey = function( ev ){
         // append via document listener via $.fn.FancySelect.openList()
 		// unbind via $fn.FancySelect.closeList()
@@ -169,7 +169,7 @@ var searchString='';
 		pressedKeyChar = ev.which;
         try {
 			window.clearTimeout( clearString );
-		} catch( e ) {};
+		} catch( e ) {}
 		if( pressedKeyChar == 32 || pressedKeyChar >= 48 && pressedKeyChar <= 122 ){
 			var chr = String.fromCharCode( pressedKeyChar );
 			searchString += chr;
@@ -188,18 +188,18 @@ var searchString='';
 			// select first an active triggered then select additionally
 			// the selected use the first element (should be the hovered)
 			$this = $( 'div.options:visible li.entry_hover' );
-			if( $this.length == 0 ){
+			if( $this.length === 0 ){
 			   $this = $( 'div.options:visible li.entry_selected' );
 			}
 			if( ev.keyCode == 38 ) {
 				$new = $this.prev();
 				// check if a next or prev group is available
-				if( $new.length == 0 ) {
+				if( $new.length === 0 ) {
 					$new = $this.parents( 'div.group' ).prev().find( 'li' ).last();
 				}
 			} else {
 				$new = $this.next();
-				if( $new.length == 0 ) {
+				if( $new.length === 0 ) {
 				// check if a next or prev group is available
 					$new = $this.parents( 'div.group' ).next().find( 'li' ).first();
 				}
@@ -217,7 +217,7 @@ var searchString='';
 			// this is intentional
 			$( 'div.options:visible li.entry_selected' ).trigger( 'click' );
 		}	
-	},
+	};
 	// plugin defaults - added as a property on our plugin function
 	$.fn.FancySelect.defaults = {
 		maxEntries: '8',
